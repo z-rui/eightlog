@@ -1,0 +1,604 @@
+\input log8mac
+
+%%
+
+\cover 简 便 八 位 对 数 表
+
+\pageno=-1 % 罗马数字页码
+
+\title 前\qquad 言
+
+\looseness=1
+由我们伟大领袖毛主席亲自发动和领导的史无前例的无产阶级文化大革命已经取得了%
+极其伟大的胜利。 全党、 全军、 全国人民紧密团结在毛主席和党中央的周围，
+坚决贯彻执行毛主席提出的 {\bf “鼓足干劲， 力争上游， 多快好省地建设社会主义”}
+的总路线和 {\bf “抓革命， 促生产， 促工作， 促战备”} 的伟大指示， 出现了%
+社会主义革命和社会主义建设的新高潮。
+
+我国的工程技术、 测量勘察、 科学研究、 国防战备、 大专院校等各部门在社会主义%
+建设的高潮中， 迫切需要多位对数表作计算工具。 但是， 现已出版的多位对数表，
+有的篇幅长达数百页； 有的虽页数较少， 但需其他计算工具作辅助， 使用和携带%
+都感到不大方便。 为了满足广大工农兵和科技工作者在三大革命运动中的计算需要，
+特编出这个 《简便八位对数表》。
+
+本表的编排法虽与克拉克等编排法有相似之处， 但亦有不少区别。 本对数表给出了
+$\lg N$， 分成两个表： 表~2 中 $N$ 值取了四位， 自 1000 至 9999， 表~3 中
+$N$ 取了两位, 自 100001 至 100099。
+由于本对数表采用了较方便的非线性插值法代替常用的线性插值法 （见用法说明），
+因此尾差 $d$ 等栏可删去， 查表方法随之亦可简化一些。 同时由于本对数表的表~2
+可以很方便地代替四位对数表及反对数表， 因而在作插值时并不需要后面附上四位%
+对数表及反对数表。 这样， 本对数表篇幅为六十四开七十多页， 比以往各表少十余倍。
+使用本对数表可产生最大误差小于 $0.4 \times 10^{-8}$， 还不到第八位的半个单位。
+与同位数对数表比较， 精确度还要略高些。
+
+在表末列了本对数表的使用方法等， 帮助使用者能很快学会使用本表。 另外为了方便%
+使用者把一些常数列为表~1。
+
+本对数表在编制过程中曾经得到有关领导和广大革命同志的大力支待和热情帮助，
+特别是得到了中国科学院数学研究所革委会及该所的一些同志的热情帮助和指导，
+提供了新的插值方法， 切实可行， 于此一并致谢。
+
+由于编者组知识菲浅， 且系初次编制数表， 错误在所难免， 希望广大革命同志提出%
+批评、 指正。 以便编者加以修改。
+
+\bigskip
+\rightline{一九七〇年 一月}
+\vfill\eject
+
+\begingroup\nopagenumbers % 无页码页面
+
+\quotation 毛 主 席 语 录
+
+中国共产党是全中国人民的领导核心。 没有这样一个核心， 社会主义事业就不能胜利。
+
+我们必须打破常规， 尽量采用先进技术， 在一个不太长的历史时期内， 把我国建设%
+成为一个社会主义的现代化的强国。
+
+抓革命， 促生产， 促工作， 促战备。
+\endquotation
+\vfill\eject
+
+\title 目\qquad 录 
+
+\narrower
+\def\\#1...#2;{\noindent#1\dotfill#2\par}
+\\前言...i;
+\\表~1\quad 数学常数表...1;
+\\表~2\quad 1000--9999 的对数尾数表...2;
+\\表~3\quad 100001--100099 的对数尾数表...74;
+\\用法说明...76; % 以上的页码都是固定的， 不要插入其他内容
+\\误差估计...89; % XXX 修改本文件时，应注意检查此页码！
+\vfill\eject
+
+\endgroup % 结束无页码页面
+
+%%
+
+\pageno=1 % 阿拉伯数字页码
+
+\centerline{\strut\bf 表~1\quad 数学常数表}
+\smallskip
+\vbox{\eightpoint\offinterlineskip
+\def\smallgap{\omit&&height 2pt&&&&\cr}
+% 适当增加行高， 使表格撑满页面
+\setbox\strutbox=\hbox{\vrule height8.5pt depth3pt width0pt}
+\setbox0=\hbox{四个汉字} % 第一列的宽度
+\tabskip=0pt plus 1fil
+\halign to \hsize{\strut
+% 下面的 \hbox 构造的作用：
+% 1) 不超过四个字时：分散对齐；
+% 2) 超过四个字时，允许超出右边界。
+\hbox to \wd0{\spaceskip=2pt plus 1fill\relax#\hss}&\hfil$#$\hfil&
+&\vrule#&#\hfil\tabskip=.5em&\hfil#\hfil&\hfil#\tabskip=0pt plus 1fil\cr
+\toprule
+\multispan2\hfil\bf 名 \ 称 \ 和 \ 符 \ 号\hfil&&
+\multispan3\hfil$\mib N$\hfil&&\multispan3\hfil$\bflg \mib N$\hfil\cr
+\midrule
+自然对数底&           e&& 2.718&2818&3&& 0.4342&9448&2\cr
+&                   1/e&&0.3678&7944&1&&\1.5657&0551&8\cr
+模 数&          M=\lg e&&0.4342&9448&2&&\1.6377&8431&1\cr
+倒 模 数&    1/M=\ln 10&& 2.302&5850&9&& 0.3622&1568&9\cr
+圆 周 率&           \pi&& 3.141&5926&5&& 0.4971&4983&3\cr
+&                  2\pi&& 6.283&1853&1&& 0.7981&7986&6\cr
+&                 \pi/2&& 1.570&7963&3&& 0.1961&1987&7\cr
+&                 \pi/3&& 1.047&1975&5&& 0.0200&2861&8\cr
+&                4\pi/3&& 4.188&7902&0&& 0.6200&8860&9\cr
+&                 1/\pi&&0.3183&0988&6&&\1.5028&5012&7\cr
+&                 3/\pi&&0.9549&2965&9&&\1.9799&7138&2\cr
+&                1/2\pi&&0.1591&5494&3&&\1.2018&2013&2\cr
+&                 \pi^2&& 9.869&6044&0&& 0.9942&9974&5\cr
+&               1/\pi^2&&0.1013&2118&4&&\1.0057&0025&\5\cr
+&              \sqrt\pi&& 1.772&4538&5&& 0.2495&7493&6\cr
+&       \root 3 \of \pi&& 1.464&5918&9&& 0.1657&1662&4\cr
+&\root 3 \of {3 / 4\pi}&&0.6203&5049&1&&\1.7926&3713&0\cr
+弧 度&   \enspace\rho^\circ=180/\pi\hfill&&
+             57\rlap.$^\circ$29&5779&5&& 1.7581&2263&2\cr
+弧 度 分&\enspace\rho'=60\rho^\circ\hfill&&
+                  3437\rlap.$'$&7467&7&& 3.5362&7388&3\cr
+弧 度 秒&\enspace\rho''=60\rho'\hfill&&
+                  2062&\hbox to 0pt{\hss 64\rlap.$''$80\hss}&6&&
+                                         5.3144&2513&3\cr
+欧拉 (Euler) 常数&\hfil\gamma&&
+                        0.5772&1566&\5&&\1.7613&3810&9\cr
+&              \hfil e^\gamma&&
+                          1.781&0724&2&& 0.2506&8157&8\cr
+\botrule}}
+\vfill\eject
+
+% 表2和表3的数据由程序生成
+\begingroup\output{\taboutput}
+\input log8data
+\endgroup
+
+%%
+
+\title 用 法 说 明 
+
+这里仅对 《简便八位对数表》 的一般用法加以说明。 有关对数的原理和运算法则，
+使用者皆已熟悉， 本说明从略。
+
+（一） 表~1 是数学常数的对数表。
+
+（二） 表~2 和表~3 列有九位数字的常用对数尾数。
+有时末位 （或倒数第二位） 出现 “\5” 字样， 它表示该位数不足 5，
+例如： .22248 取四位改记成 .222\5。 与其他对数表一样，
+对数的首数可以由真数小数点的位置直接观察得出， 故表中不列出。
+利用表~2 和表~3， 采用下述插值方法可以求出任意真数的准确到八位数值的对数尾数。
+反之， 也可以由任一对数值求得准确到八位数值的真数。
+
+（三） 真数有效数字为四位 （或四位以下） 时， 其对数尾数可且直接在表~2
+中查得。 反之， 如果某一对数值可在表~2 中直按查出， 则相对应的真数必定是一个%
+有效数字为四位 （或少于四位） 的数值。
+
+\Ex1 已知 $N=32.67$， 求 $\lg N={?}$
+
+由观察得首数为 1， 从第~21~页表~2 的 $\lg N$ 栏中查得：
+$$\lg 32.67=1.514149134$$
+
+\Ex2 已知 $\lg N = 4.756027213$， 求 $N={?}$
+
+从第~38~页表~2 中， 在倒数第~5~行找到上述对数值， 即可找到对应的真数，
+因首数为 4， 故真数为五位整数： $$N=57020.0000$$
+
+（四） 真数在 100001--100099 之间者， 其对数值可自表~3 直接查出。 反之，
+对数值可在表~3 中直接找到， 则其对应的真数在表~3 的 $N$ 栏中即可直接查出。
+查法同上两例 （略）。
+
+（五） 真数有效数字在四位以上者， 求对数时需要运用下述插值法。
+
+设 $N=a_0.a_1a_2a_3a_4a_5a_6a_7a_8$ ($0\le a_i\le 9$, $a_0\ge 1$, $a_i$ 为整数)
+$N$ 系一十进小数， 以 $a_0.a_1a_2a_3$ 为除数， 以 $N$ 为被除数做除法，
+得出六位商数 $1.000b_1b_2$ 为止， 则 $N$ 可表为：
+$$\displaylines{
+N = a_0.a_1a_2a_3 \times 1.000b_1b_2 + 0.0000b_3b_4b_5b_6
+\hfil\llap{(1)}\hfilneg\cr % 代替 \eqno
+\hbox{($0\le b_i\le 9$, $b_i$ 为整数, $0\le b_3b_4b_5b_6 < a_0a_1a_2a_3$)}\cr
+}$$
+设 $$\alpha = a_0.a_1a_2a_3,\;\beta=1.000b_1b_2,\;\delta=0.0000b_3b_4b_5b_6.$$
+代入 (1)~式得
+$$N=\alpha\left(1+{\delta\over\alpha\beta}\right) \eqno(2)$$
+对 (2)~式取对数得：
+$$\lg N = \lg\alpha + \lg\beta + \lg\left(1+{\delta\over\alpha\beta}\right)
+\eqno(3)$$
+由 $\alpha$、 $\beta$、 $\delta$ 定义可知
+$$0 < {\delta\over\alpha\beta} \le {\delta\over\alpha} \le 10^{-5} \eqno(4)$$
+
+根据对数换底公式
+$$\log_a Q = {\log_b Q \over \log_b a}$$
+特别当 $a=e$, $b=10$, 设模数 $M=\lg e$ 时有
+$$\lg Q = M\ln Q$$
+又根据幂级数展开公式
+$$\displaylines{
+\ln(1+x) = \sum_{n=1}^\infty {(-1)^{n+1}\over n}x^n\cr
+\hbox{($|x|<1$, $n$ 为自然数)}\cr
+}$$
+则 (3)~式化为：
+$$\lg N = \lg\alpha + \lg\beta + M{\delta\over\alpha\beta}
++ M\sum_{n=1}^\infty {(-1)^{n+1}\over n}\left(\delta\over\alpha\beta\right)^n
+\eqno(5)$$
+得近似公式
+$$\boxed{\lg N \approx \lg\alpha + \lg\beta + M{\delta\over\alpha\beta}}
+                                                              \eqno(6)$$
+公式 (6) 就是本表所采用的插值公式， $M{\delta\over\alpha\beta}$ 即是需要的%
+差值部分。
+
+\Ex3 已知 $N=127263527$， 求 $\lg N={?}$
+
+首先以此真数的首四位为除数， 真数 $N$ 为被除数做除法， 得出六位商数为止， 则
+$N$ 可表为：
+$$\displaylines{
+N = \alpha\beta+\delta = 1272 \times 100049 + 1199,\cr
+\lg N = \lg 1272 + \lg 100049 + M{1199\over 1272\times 100049}\cr
+}$$
+
+\step 计算对数插值部分 $\left(M{1199\over 1272\times 100049}\right)$：
+
+用四位对数表\footnote{$^{1)}$}{这里表~2 兼作四位对数表及反对数表使用。
+通过查表~2， 运用四舍五入法截取四位数值即可。}
+作下列计算：
+$$\aralign{
+ &\lg 1199       &=&.0788\cr
++&\lg M          &=&.6378^{2)}\cr
+\hline4
+ &               & &.7166\cr
+-&\lg\alpha\beta &=&.1047^{3)}\cr
+\hline5
+ &               & &.6119 = \lg 4092\span\cr
+}$$
+\vfootnote{$^{2)}$}{$\lg M$ 是模数的对数， 系一常数 $\1.63778\cdots$
+（参看表~1）， 此处截取四位数值。 此数常用请记住。}
+\vfootnote{$^{3)}$}{$\lg \alpha\beta$ 由下式 $\lg\alpha + \lg\beta$
+值截取四位而得。}
+
+\step 计算对数主项部分 $(\lg\alpha + \lg\beta)$：
+
+分别查表~2 和表~3 得：
+$$\aralign{
+ &\lg 1272         &=&\phantom0.1044\,8711\,1\cr
++&\lg 1000\,49     &=&\phantom0.0002\,1275\,2\cr
+\hline4
+ &                 & &\phantom0.1046\,9986\,3\cr
++&\rlap{(从上式移来补插值)}&&
+                    \phantom{0.0000\,0}409\,2\cr
+\hline4
+ &\hfill\lg N      &=&        8.1047\,0395\,5\cr
+}$$
+
+\Ex4 已知 $N=2.30258509$， 求 $\lg N={?}$
+
+仿上例做除法得：
+$$N=\alpha+\beta+\delta = 2.302 \times 1.00025 + 0.00000959$$
+
+\step 计算对数插值部分 {\rm （用四位对数表）}：
+
+$$\aralign{
+ &\lg 959        &=&.9818\cr
++&\lg M          &=&.6378\cr
+\hline4
+ &               & &.6196\cr
+-&\lg\alpha\beta &=&.3622\cr
+\hline5
+ &               & &.2574 = \lg 1809\span\cr
+}$$
+
+\step 计算对数主项部分：
+
+$$\aralign{
+ &\lg 2302     &=&\phantom0.3621\,0531\,9\cr
++&\lg 1000\,25 &=&\phantom0.0001\,0856\,0\cr
+\hline4
+ &             & &\phantom0.3622\,1387\,9\cr
++&\rlap{(从上式移来补插值)}&&
+                \phantom{0.0000\,0}180\,9\cr
+\hline4
+ &  \hfill\lg N&=&        0.3622\,1568\,8\cr
+}$$
+
+设 $N$ 的末位非零数字前所有的位数 （包括该位） 为 $n$， 当 $n\le4$ 及
+$n=9$~时的求对数的方法如前所述。 当 $4<n<9$ 时， 则必须用补位 （添 “0”）
+的方法把 $N$ 看成 $n=9$ 的数， 再按上述方法 （五） 进行计算， 可得%
+八位有效数字的对数尾数。
+
+\Ex5 已知 $N=10118$， 求 $\lg N={?}$
+
+首先必须把 $N$ 添 “0” 成为 $n=9$， 即$$N=10118.0000,$$再按 [例~3] 所述方法%
+进行计算， 可得：$$N=1011\times 10.0079 + .0131 = \alpha\beta + \delta$$
+经查表计算得：$$\lg N=4.0050\,9467\,5$$
+
+当 $n > 9$ 时， 可用四舍五入法将真数 $N$ 变成 $n=9$ 的情形进行查表计算， 例略。
+
+（六） 对数值不能直接从表~2 或表~3 查得时， 求真数， 其方法是上述 （五）~法%
+的逆过程， 关键是如何确定 $\alpha$、 $\beta$ 和 $\delta$， 下面举例说明之。
+
+\Ex6 已知 $\lg N=1.7613\,3810\,9$， 求 $N={?}$
+
+\step 计算真数主项部分 {\rm ($\alpha$ 和 $\beta$)}：
+
+由公式 (6) 得：
+$M{\delta\over\alpha\beta}\approx\lg N - \lg\alpha - \lg\beta$
+$$\aralign{
+ &\lg N         &=&       \1.7613\,3810\,9\cr
+-&\lg 5772      &=&\phantom0.7613\,2632\,2^{4)}\;(\lg\alpha)\cr
+\hline4
+ &              & &\phantom0.0000\,1178\,7\cr
+-&\lg 1000\,02  &=&\phantom0.0000\,0868\,6^{5)}\;(\lg\beta)\cr
+\hline4
+ &M{\delta\over\alpha\beta}
+                &=&\phantom{0.0000\,0}310\,1\cr
+}$$
+\vfootnote{$^{4)}$}{\def\,{\allowbreak\mskip\thinmuskip}% 允许断行，以免越界
+确立 $\lg\alpha$ 的原则是， 在表~2 中找到比 $\lg N$ 小，
+且最接近 $\lg N$ 的对数尾数。 如表~2 中小于 $.7613\,3810\,9$ 而且最接近它的%
+对数尾数是 $.7613\,2632\,2$， 对应 $\alpha=5772$。}
+\vfootnote{$^{5)}$}{%
+确定 $\lg\beta$ 的原则是， 在表~3 中找到比 $\lg N - \lg\alpha$ 小，
+而且最接近它的对数尾数。 如， 这里 $\lg N - \lg\alpha = .0000\,1178\,7$，
+表~3 中小于 $.0000\,1178\,7$， 而且最接近它的对数尾数是 $.0000\,0868\,6$，
+对应 $\beta=100002$。}
+
+\step 计算真数插值部分 $\delta$
+{\rm （用四位对数表\footnote{$^{6)}$}{\rm 同注~1)。}）}：
+
+$\lg\delta = \lg M{\delta\over\alpha\beta} - \lg M + \lg\alpha\beta$
+$$\aralign{
+ &\lg 3101       &=&.4915\cr
+-&\lg M          &=&.6378\cr
+\hline4
+ &               & &.8537\cr
++&\lg\alpha\beta &=&.7613^{7)}\cr
+\hline5
+ &\lg\delta      &=&.6150 = \lg 4121\span\cr
+}$$ \vfootnote{$^{7)}$}{按注~4)、 5) 确定的 $\lg\alpha$、 $\lg\beta$
+相加取四位而得。}
+则 $$\aralign{
+&N=\alpha\beta+\delta&=&\phantom{0.}5772 \,0\cr
+&&&                     \phantom{0. 0000}\,1 \,1544\;(=5772\times 0000\,2)\cr
+&&&                     \phantom{0. 0000 \,0}\,4121\;{{从计算插值部}\choose
+                                                      {分移来补插值}}\cr
+\hline4
+&\hfill 即\qquad N   &=&         0. 5772 \,1 \,5665\cr
+}$$
+
+\Ex7 已知 $\lg N = 0.7976\,0346\,4$， 求 $N={?}$
+
+\step 计算真数主项部分：
+
+$$\aralign{
+ &\lg N                   &=&         0.7976\, 0346\,4\cr
+-&\lg 6274                &=&\phantom 0.7975\, 4451\,4\;(\lg\alpha)\cr
+\hline4
+&&&                          \phantom 0.0000\, 5895\,0\cr
+-&\lg 1000\,13            &=&\phantom 0.0000\, 5645\,5\;(\lg\beta)\cr
+\hline4
+&M{\delta\over\alpha\beta}&=&\phantom{0.0000\,0}249\,5\cr
+}$$
+
+\step 计算真数插值部分：
+
+$$\aralign{
+ &\lg 2495      &=&.3971\cr
+-&\lg M         &=&.6378\cr
+\hline4
+&               & &.7593\cr
++&\lg\alpha\beta&=&.7976\cr
+\hline5
+ &\lg\delta     &=&.5569 = \lg 3605\span\cr
+}$$
+
+$$\aralign{
+&\llap{则 }N  &=&\phantom .6274 \,0\cr
+&&&              \phantom{.0000}\,8 \,1562\;(=6274\times 0001\,3)\cr
+&&&              \phantom{.0000 \,0}\,3605\;(\hbox{补插值})\cr
+\hline4
+&\llap{即 }N  &=&         6.274 \,8 \,5167\cr
+}$$
+
+若对数值有效数字少于九位， 同样用添 “0” 方法把它补足九位数字，
+再按上述方法进行计算， 例略。
+
+若对数值有效数字多于九位， 则采用四舍五入法截取九位，
+再按上述方法进行计算， 例略。
+
+\medbreak
+
+（七） 实例计算
+
+\Ex8 已知 $N=1272\,6352\,7$， 求$$P=\root 5\of {(\pi N/e)^4}={?}$$
+
+\Sol $$P=\root 5\of{(\pi N/e)^4}=(\pi N/e)^{4/5}=(\pi N/e)^{0.8}$$
+
+由上述 [例~3] 可知 $\lg N = 8.1047\,0395\,5$， 于是列出算式如下：
+
+\step 计算主项部分：
+
+$$\aralign{
+ &\lg N              &=& 8.1047\,0395\,5\cr
+ &\lg\pi             &=& 0.4917\,4987\,3\cr
++&\lg{1\over e}      &=&\1.5657\,0551\,8\cr
+\hline4%-------------------------------------
+ &\lg{\pi N\over e}  &=& 8.1675\,5934\,6\cr
+\times&              & &      \hfill 0.8\cr
+\hline4%-------------------------------------
+ &\lg P              &=& 6.5340\,4747\,7\cr
+-&\lg 3420    &=&\phantom0.5340\,2610\,6&\;(\lg\alpha)\cr
+\hline5
+ &            & &\phantom0.0000\,2137\,1\cr
+-&\lg 1000\,04&=&\phantom0.0000\,1737\,1&\;(\lg\beta)\cr
+\hline5%--------------------------------------------------
+ &            &&\phantom{0.0000\,0}400\,0\cr
+}$$
+
+\step 计算插值部分：
+
+$$\aralign{
+ &\lg 4000      &=&.6021\cr
+-&\lg M         &=&.6378\cr
+\hline4%-------------------
+ &              & &.9643\cr
++&\lg\alpha\beta&=&.5340\cr
+\hline5%-----------------------------------
+ &              & &.4983 = \lg 3150\span\cr
+}$$
+$$\aralign{
+&\llap{则 }P   &=&3420\, 0\cr
+&&&     \phantom{0000}\, 136\,80\;(=3240\times 00004)\cr
+&&&     \phantom{0000 \,0}31\,50\cr
+\hline4%   ---------------------------------------------
+&\llap{即 }P   &=&3420\, 168\phantom\,\llap.30\cr
+}$$
+
+\Ex9 中国人民银行某分行收得各储户的存款共计 $2048\,3830.0$ 元，
+若定期为三年， 月利率为 $0.2\%$， 求到期后应付本利和为若干元？
+
+\Sol 根据复利公式 $A = N(1+r)^t$， 由题意得，
+$$\openup -2\jot
+\displaylines{N = 2048\,3830.00,\,r=0.2\%=0.002,\cr t=3\times 12=36\cr}$$
+从上述 [例~3] 方法先求出 $\lg N = 7.311\,1116\,2$。
+
+\step 计算主项部分：
+
+$$\aralign{
+ &\lg N              &=& 7.3114\,1116\,2\cr
++&36\times\lg 1.002  &=& 0.0312\,3799\,2\cr
+\hline4%-----------------------------------
+ &\lg A              &=& 7.3426\,4915\,4\cr
+-&\lg 2201    &=&\phantom0.3426\,2004\,3&\;(\lg\alpha)\cr
+\hline5%-------------------------------------------------
+ &            & &\phantom0.0000\,2911\,1\cr
+-&\lg 1000\,06&=&\phantom0.0000\,2605\,7&\;(\lg\beta)\cr
+\hline5%-------------------------------------------------
+ &           & &\phantom{0.0000\,0}305\,4\cr
+}$$
+
+\step 计算插值部分：
+
+$$\aralign{
+ &\lg 3054      &=&.4849\cr
+-&\lg M         &=&.6378\cr
+\hline4%-------------------
+ &              & &.8471\cr
++&\lg\alpha\beta&=&.3426\cr
+\hline5%-----------------------------------
+ &              & &.1897 = \lg 1548\span\cr
+}$$
+$$\aralign{
+&\llap{则 }A  &=&2201\,0\cr
+&&&    \phantom{0000}\,1320\,6\;(=2201\times 00006)\cr
+&&&    \phantom{0000\,0}154\,8\cr
+\hline4%   -------------------------------------------------
+&\llap{即 }A  &=&2201\,1475\phantom\,\llap.4\;(\hbox{元})\cr
+}$$
+
+\title 误 差 估 计 
+
+下面我们来估计一下使用这种查表方法时所可能产生的最大误差。
+这个误差由三部分构成： 一是插值公式 (6) 本身的误差；
+二是表~2 和表~3 的误差； 三是使用四位对数表及反对数表计算补插值
+$M{\delta\over\alpha\beta}$ 的误差。
+
+（一） 比较公式 (5) 和 (6) 可知， 插值公式本身的误差即是余项
+$$\eqalignno{
+\Delta_1(N) &= \lg N - \lg\alpha - \lg\beta - M{\delta\over\alpha\beta}\cr
+&= M \sum_{n=2}^{\infty} {(-1)^{n+1}\over n}%
+\left(\delta\over\alpha\beta\right)^n&(7)\cr
+}$$
+的绝对值的上限。 舍去 $n>3$ 的所有余项可得
+$$\displaylines{
+0 > \Delta_1(N) > -M \left[%
+ {1\over2}\left(\delta\over\alpha\beta\right)^2
+-{1\over3}\left(\delta\over\alpha\beta\right)^3\right]\cr
+\hbox{($M$ 取上界)}\cr
+}$$
+由 (4)~式得
+$$\eqalign{
+0 > \Delta_1(N) &> -M \left[%
+ {1\over2}\bigl(10^{-5}\bigr)^2
+-{1\over3}\bigl(10^{-5}\bigr)^3\right]\cr
+&> -0.44 \times {1\over2} \times 10^{-10}\cr
+&= -0.22 \times 10^{-10}
+}$$
+即
+$$0 < \bigl|\Delta_1(N)\bigr| < 0.22 \times 10^{-10} \eqno(8)$$
+
+
+（二） 表~2 和表~3 均列有九位有效数字的对数尾数的近似值， 因此，
+由四舍五入法可能产生的最大误差各为 $0.5 \times 10^{-9}$， 则表~2 和表~3
+的总误差为 $1 \times 10^{-9}$。
+
+（三） 计算补插值 $M{\delta\over\alpha\beta}$ 时， 考虑到
+$$\lg M{\delta\over\alpha\beta}
+= \lg M + \lg\delta - \lg\alpha - \lg\beta \eqno(9)$$
+
+1. 设 $\varepsilon(N)$ 是 (9)~式查四位对数表可能产生的最大误差， 又设
+$\varepsilon(M)$、 $\varepsilon(\delta)$、 $\varepsilon(\alpha)$、
+$\varepsilon(\beta)$ 分别是 (9)~式用四位对数表查 $\lg M$、 $\lg\delta$、
+$\lg\alpha$、 $\lg\beta$ 而产生的最大误差。
+
+由于 $\lg M$ 为一常数， 值为 $\1.637784\dots$， 当截取四位数时%
+产生的误差 $$\bigl|\varepsilon(M)\bigr| < 0.16 \times 10^{-4}$$
+而四位对数表的最大误差小于 $0.5 \times 10^{-4}$， 所以
+$$\def\eps#1{\bigl|\varepsilon(#1)\bigr|}\eqalignno{
+\eps N &= \bigl|\varepsilon(M) + \varepsilon(\delta) + \varepsilon(\alpha)
+              + \varepsilon(\beta)\bigr|\cr
+&\le \eps M - \eps \delta + \eps \alpha - \eps \beta\cr
+&< 0.16 \times 10^{-4} + 3 \times 0.5 \times 10^{-4}\cr
+&= 1.66 \times 10^{-4}&(10)\cr
+}$$
+
+2. 设 $\varphi(N)$ 为四位反对数表的最大误差， 则
+$$\bigl|\varphi(N)\bigr| \le 0.5 \times 10^{-4} \eqno(11)$$
+
+又设 $u$ 是 $\lg M{\delta\over\alpha\beta}$ 的首数， 由 $M$ 的定义和 (4)~式%
+可知
+$$0 < M{\delta\over\alpha\beta} \le M{\delta\over\alpha} < M \times 10^{-5}
+< 4.343 \times 10^{-6}$$
+所以 $$u \le -6 \eqno(12)$$
+
+3. 设 $\Delta_2(N)$ 是使用四位对数表和四位反对数表求
+$M{\delta\over\alpha\beta}$ 而产生的最大误差， 如果注意到在使用四位对数表时%
+只须考虑对数尾数的误差， 则有
+$$\displaylines{M{\delta\over\alpha\beta} + \Delta_2(N)\cr
+= \left\lbrace
+10^{\left[\lg M{\delta\over\alpha\beta} + \varepsilon(N) - u-1\right]}
++ \varphi(N)\right\rbrace \times 10^{u+1}\cr}$$
+即
+$$\eqalign{
+\Delta_2(N) &= 10^{\lg M{\delta\over\alpha\beta}} \times 10^{\varepsilon(N)}\cr
+&\quad + \varphi(N) \times 10^{u+1} - M{\delta\over\alpha\beta}\cr
+&= \varphi(N) \times 10^{u+1} + M{\delta\over\alpha\beta}
+\bigl[10^{\varepsilon(N)}-1\bigr]
+}$$
+由幂级数展开式 $$10^x = \sum_{n=0}^\infty {(x\ln 10)^n\over n!}$$ 可得：
+$$10^{\varepsilon(N)} = \sum_{n=0}^\infty
+{\bigl[\varepsilon(N)\ln 10\bigr]^n\over n!}
+= 1+\sum_{n=1}^\infty {\bigl[\varepsilon(N)/M\bigr]^n\over n!}$$
+则有
+$$\bigl|\Delta_2(N)\bigr| \le \bigl|\varphi(N) \times 10^{u+1}\bigr|
++ M{\delta\over\alpha\beta}
+\left|\sum_{n=1}^\infty {\bigl[\varepsilon(N)/M\bigr]^n\over n!}\right|$$
+由式 (4)、 (10)、 (11)、 (12) 得，
+$$\eqalign{
+\bigl|\Delta_2(N)\bigr| &< 0.5 \times 10^{-9} +{} \cr
+&\phantom{{}={}} M \times 10^{-5} \left[\textstyle{1.66\times 10^{-4}\over M}
+                             + {(1.66\times 10^{-4}/M)^2\over 2}\right]\cr
+&< 0.5 \times 10^{-9} + 1.66 \times 10^{-9}\cr
+&\quad +{(1.66\times 10^{-4})^2 \times 10^{-5}\over 2M}\cr
+}$$
+则
+$$\bigl|\Delta_2(N)\big| < 2.16 \times 10^{-9} \eqno(13)$$
+
+综合式 (8)、 (13) 和 （二） 可知， 使用本表取对数的总误差
+$$\eqalignno{
+\bigl|\Delta(\lg N)\bigr|
+&\le 0.22 \times 10^{-10} + 1 \times 10^{-9} + 2.16 \times 10^{-9}\cr
+&< 0.32 \times 10^{-8} < 0.4 \times 10^{-8} &(14)\cr
+}$$
+此结果是使用本表产生误差的上限， 即前言中提到的最大误差。
+
+（四） 如果采用线性插值法， 按类似上述的方法进行估计可得最大误差
+$$\bigl|\Delta_线(\lg N)\bigr| < 0.36 \times 10^{-8} < 0.4 \times 10^{-8}$$
+由此可以看出， 这两种插值方法精确度相同。 与国内外各种基础对数表比较
+（都是可能在末位产生最大误差半个单位） 本表精确程度要稍好些。
+
+（五） 另外， 如果真数有效数字多于九位时， 则取对数时必须用四舍五入法将真数%
+截取为九位， 用法如前所述。 但应用此法亦能产生一定误差， 并且此误差不包括在
+(14)~式误差之中， 但是此项误差并不是本表所特有， 而是任何 $n$~位对数表用于%
+大于 $n$~位的真数取对数时均能产生的一项误差。
+
+设 $$N=a_1a_2a_3a_4a_5a_6a_7a_8a_9.a_{10} \times 10^m$$
+四舍五入得 $$N'=a_1a_2a_3a_4a_5a_6a_7a_8a_9' \times 10^m$$
+则 $$\eqalign{\Delta N &= \bigl|N - N'\bigr| \le 0.5\times 10^m\cr
+\bigl|\lg N-\lg N'\bigr|&={M\cdot\Delta N\over N +\theta\,\Delta N}\cr
+&< {0.44\times 0.5 \times 10^m \over 10^8 \times 10^m} = 0.22\times 10^{-8}\cr}
+$$
+其中 $-1<\theta<1$。 由于式~(14) 可知， 在此种情况下取对数总误差小于
+$0.54 \times 10^{-8}$。 此种情况下如果使用鲍圣格和裴得尔 (Bauschinger, Peter)
+的 《八位对数表》 取对数则总误差小于
+$$0.5 \times 10^{-8} + 0.22 \times 10^{-8} = 0.72 \times 10^{-8}\hbox{。}$$
+
+\centerline{*\qquad *\qquad *}
+
+上述插值公式及取对数的误差估计方法， 都是按照中国科学院数学研究所及%
+安徽工农大学数学系的同志们提供的方法进行的。
+
+\bye

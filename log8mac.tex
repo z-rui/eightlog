@@ -1,0 +1,164 @@
+% 纸张： A5
+
+\pdfpageheight 148mm
+\pdfpagewidth 105mm
+
+\hsize=105mm
+\vsize=148mm
+\advance \hsize by -1in \hoffset -.5in
+\advance \vsize by -1.5in \voffset -.45in
+
+% 字体相关
+\input typezh
+\catcode`@=11
+\baselineskip=15pt
+\setbox\strutbox=\hbox{\vrule height11.5pt depth3.5pt width0pt}
+\font\sixteensong="华文中宋:letterspace=-15" at 16pt
+\font\eightsong="宋体" at 8pt
+\font\fourteenhei="黑体" at 14pt
+\font\tenhei="黑体" at 10pt
+\font\eighthei="黑体" at 8pt
+\font\eightbf=cmbx8
+\font\sixbf=cmbx6
+\font\eightrm=cmr8
+\font\sixrm=cmr6
+\font\eighti=cmmi8
+\font\sixi=cmmi6
+\font\eightsy=cmsy8
+\font\sixsy=cmsy6
+\font\tenib=cmmib10
+\font\eightib=cmmib8
+\def\bf{\fam\bffam\zhdualfont\tenhei\tenbf}
+\newfam\ibfam \textfont\ibfam=\tenib
+\def\mib{\fam\ibfam\tenib}
+\def\bflg{\mathop{\bf lg}}
+
+% 8磅字用于排版数表，改编自 manmac.tex
+\def\eightpoint{\def\rm{\fam0\zhdualfont\eightsong\eightrm}%
+  \textfont0=\eightrm \scriptfont0=\sixrm \scriptscriptfont0=\fiverm
+  \textfont1=\eighti \scriptfont1=\sixi \scriptscriptfont1=\fivei
+  \textfont2=\eightsy \scriptfont2=\sixsy \scriptscriptfont2=\fivesy
+  \textfont3=\tenex \scriptfont3=\tenex \scriptscriptfont3=\tenex
+  \textfont\ibfam=\eightib
+  %\def\it{\fam\itfam\eightit}% 注释掉的字体本文档中用不到，省略
+  %\textfont\itfam=\eightit
+  %\def\sl{\fam\slfam\eightsl}%
+  %\textfont\slfam=\eightsl
+  \def\bf{\fam\bffam\zhdualfont\eighthei\eightbf}%
+  \textfont\bffam=\eightbf \scriptfont\bffam=\sixbf
+  % \scriptscriptfont\bffam=\fivebf
+  %\def\tt{\fam\ttfam\eighttt}%
+  %\textfont\ttfam=\eighttt
+  %\tt \ttglue=.5em plus.25em minus.15em
+  \normalbaselineskip=9pt
+  \setbox\strutbox=\hbox{\vrule height7pt depth2pt width\z@}%
+  \normalbaselines\rm}
+
+% 章节标题
+\outer\def\title#1\par{\vbox to .7in
+  {\vss\centerline{\zhsinglefont\fourteenhei#1}}\bigskip}
+
+% 页脚
+\footline={\ifodd\pageno \hss\stylefolio \else \stylefolio\hss \fi}
+\def\stylefolio{\rm $\sim$\ \folio\ $\sim$}
+
+% 封面
+\outer\def\cover#1\par{\shipout\vbox to\vsize{
+\vskip \z@ plus .382fil
+\centerline{\zhsinglefont\sixteensong#1}
+\vskip \z@ plus .618fil
+}}
+
+% 语录
+\outer\def\quotation#1\par{
+  \vbox to \vsize\bgroup\baselineskip=0pt\vss
+  \def\simfill{\xleaders\hbox{$\sim$}\hfill}% 横框线
+  \def\wrfill{\xleaders\hbox to 0pt{\hss$\wr$\hss}\vfill}% 竖框线
+  \halign to \hsize\bgroup&##\cr
+  \simfill{\zhsinglefont\sixteensong #1}\simfill\cr
+  \noalign{\vskip-5pt}% 微调框线间距
+  \valign\bgroup&##\cr\wrfill\cr\vbox\bgroup
+  \zhsinglefont\fourteenhei\zhnormalskips
+  \baselineskip=19pt \parskip\baselineskip \parindent=28pt
+  \narrower \null}
+\outer\def\endquotation{
+  \vskip\parskip \egroup% 结束内部 \vbox
+  \cr\wrfill\cr\egroup% 结束 \valign
+  \cr\noalign{\vskip-2pt}% 微调框线间距
+  \simfill\cr\egroup% 结束 \halign
+  \vss\egroup}% 结束外部 \vbox
+
+% 带上划线的数字1和5
+\def\1{\overbar1}
+\def\5{\overbar5}
+\def\overbar#1{\hbox{$\m@th\overline#1$}}
+% 数表中左侧加星号
+\def\*{\llap{*\kern-\p@}}
+
+% 表格工具
+% 横线
+\def\lefttab{\begintab\leftheader}
+\def\righttab{\begintab\rightheader}
+% 表头（行）
+\def\leftheader{$\mib N$\hfil&&
+  \bf 0\hfil&&\bf 1\hfil&&\bf 2\hfil&&\bf 3\hfil&&\bf 4\hfil\cr}
+\def\rightheader{%
+  \bf 5\hfil&&\bf 6\hfil&&\bf 7\hfil&&\bf 8\hfil&&\bf 9\hfil&&
+  $\mib N$\hfil\cr}
+% 表2
+\def\begintab#1{\vbox\bgroup
+  \eightpoint\offinterlineskip
+  \def\blankline{&&&&&&&&&&\cr}
+  \def\smallgap{\omit&height 2\p@&\omit&&\omit&&\omit&&\omit&&\omit\cr}
+  \spaceskip=.2em \tabskip\centering
+  \halign to \hsize\bgroup &\strut\hfil##&\vrule##\cr
+  \toprule #1\midrule}
+% 表2、表3通用
+\def\endtab{\botrule \egroup \egroup % 关闭 \valign 和 \vbox
+  \eject}% 不用 \vfill，输出例程 \taboutput 会填充页面
+\def\toprule{\noalign{\hrule height\p@}\smallgap}
+\def\midrule{\smallgap\noalign{\hrule \vskip\p@ \hrule}\smallgap}
+\def\botrule{\smallgap\noalign{\hrule height\p@}}
+% 表3
+\def\longheader{$\mib N$\hfil&&$\bflg \mib N$\hfil&&
+                $\mib N$\hfil&&$\bflg \mib N$\hfil\cr}
+\def\longmidrule{\smallgap\noalign{\copy\z@}\multispan\thr@@&height\p@\cr
+                          \noalign{\copy\z@}\smallgap}
+\def\longtab{\vbox\bgroup
+  \eightpoint\offinterlineskip
+  \def\blankline{&&&&&&\cr}
+  \def\smallgap{\omit&height2\p@&&&\omit&&\cr}
+  \setbox\z@=\hbox to \hsize{\hrulefill\hskip\p@\hrulefill}
+  \tabskip\centering
+  \halign to \hsize\bgroup
+  &\strut\hfil##&\vrule##&\hfil##&\vrule##\kern\p@\vrule\cr
+  \toprule \longheader \longmidrule}
+  
+% 表格输出例程
+\newtoks\tabtitle % 表格标题（放在偶数页）
+\newtoks\N \newtoks\lgN % N 和 lgN 的范围（放在奇数页）
+\def\taboutput{\setbox\@cclv\vbox{
+  \ifodd\pageno \rightline{\strut\bf $\mib N$\quad\the\N\qquad}% N 范围
+  \else         \leftline{\strut\bf\qquad\the\tabtitle}\fi% 表格标题
+  \smallskip\unvbox\@cclv
+  \ifodd\pageno \nointerlineskip\smallskip
+    \rightline{\strut\bf $\bflg \mib N$\quad\the\lgN\qquad}\fi% lgN 范围
+  \vss}
+  \plainoutput}
+
+% 《用法说明》工具
+\outer\def\step#1\par{{\bf#1}\par\nobreak} % 计算XXX：
+\outer\def\Ex#1 #2\par{\smallskip{\bf [例~#1]}\quad#2\par\nobreak}
+\outer\def\Sol{{\bf 解}\quad}
+% 列竖式用对齐环境
+\def\aralign#1{\vcenter{\offinterlineskip\lineskip=\jot
+  \ialign{&\mathstrut$\displaystyle{{}##{}}$\hfil&
+  $\displaystyle##$\hfil\crcr
+  #1\crcr}}}
+% 竖式中画横线（前#1列）
+\def\hline#1{\multispan#1\hrulefill\cr}
+% 带框公式
+\def\boxed#1{\vrule\vcenter{\hrule\vskip 4pt\hbox{\hskip 4pt$\displaystyle#1$
+  \hskip 4pt}\vskip 4pt\hrule}\vrule}
+
+\catcode`@=12
